@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
     protected $fillable = [
-        "id",
         "name",
         "email",
         "phone",
@@ -22,11 +22,8 @@ class Customer extends Model
         ];
     }
 
-    /**
-     * @return HasMany<Subscription, $this>
-     */
-    // public function subscriptions(): HasMany
-    // {
-    //     return $this->hasMany(Subscription::class);
-    // }
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

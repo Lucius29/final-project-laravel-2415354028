@@ -8,18 +8,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Service extends Model
 {
     protected $fillable = ["name", "price", "description", "status"];
-    protected function casts(): array
-    {
-        return [
-            "status" => "boolean",
-            "price" => "integer"
-        ];
-    }
-
-    // @return HasMany<Subcription, $this>
-
-    // public function subcriptions(): HasMany
+    // protected function casts(): array
     // {
-    //     return $this->hasMany(Subscription::class);
+    //     return [
+    //         "status" => "boolean",
+    //         "price" => "integer"
+    //     ];
     // }
+
+    /** 
+     *@return HasMany<Subcription, $this>
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }
