@@ -39,7 +39,7 @@ class ServiceController extends Controller
         $data = $request->validate([
             "name" => ["required", "string"],
             "price" => ["required", "integer", "min:0"],
-            "description" => ["nullable", "boolean"]
+            "description" => ["nullable", "string"]
         ]);
 
         $data["status"] = $data["status"] ?? true;

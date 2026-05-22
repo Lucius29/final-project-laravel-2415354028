@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\SubscriptionController;
 
 
 Route::get('/user', function (Request $request) {
@@ -32,3 +33,5 @@ Route::patch("customers/{customer}/deactivate", [
     CustomerController::class,
     "deactivate",
 ]);
+
+Route::apiResource("subscriptions", SubscriptionController::class);

@@ -32,7 +32,7 @@ class CustomerController extends Controller
 
         return response()->json([
             "success" => true,
-            "messagee" => "Customers retrieved successfully",
+            "message" => "Customers retrieved successfully",
             "data" => $customers,
         ]);
     }
@@ -40,7 +40,6 @@ class CustomerController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            "id" => ["required", "string"],
             "name" => ["required", "string"],
             "email" => ["nullable", "email", "unique:customers,email"],
             "phone" => ["nullable", "string"],
@@ -48,12 +47,10 @@ class CustomerController extends Controller
             "status" => ["nullable", "boolean"]
         ]);
 
-        $data["status"] = $data["status"] ?? true;
-
         $customer = Customer::query()->create($data);
 
         return response()->json([
-            "success" => "true",
+            "success" => true,
             "message" => "Customer created successfully",
             "data" => $customer,
         ], 201);
@@ -91,11 +88,6 @@ class CustomerController extends Controller
         }
 
         $data = $request->validate([
-            "customer_id" => [
-                "sometimes",
-                "string",
-                "unique:customers,customer_id," . $customer->id,
-            ],
             "name" => ["sometimes", "string"],
             "email" => [
                 "nullable",
