@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\CustomerController;
 
 
 Route::get('/user', function (Request $request) {
@@ -17,5 +18,17 @@ Route::patch("services/{service}/activate", [
 
 Route::patch("services/{service}/deactivate", [
     ServiceController::class,
+    "deactivate",
+]);
+
+Route::apiResource("customers", CustomerController::class);
+
+Route::patch("customers/{customer}/activate", [
+    CustomerController::class,
+    "activate",
+]);
+
+Route::patch("customers/{customer}/deactivate", [
+    CustomerController::class,
     "deactivate",
 ]);
