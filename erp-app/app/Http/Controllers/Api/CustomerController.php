@@ -103,7 +103,7 @@ class CustomerController extends Controller
 
         return response()->json([
             "success" => true,
-            "message" => "Customer retrieved successfully",
+            "message" => "Customer updated successfully",
             "data" => $customer
         ]);
     }
@@ -120,7 +120,7 @@ class CustomerController extends Controller
             ], 404);
         }
 
-        if ($customer->subscription()->exists()) {
+        if ($customer->subscriptions()->exists()) {
             return response()->json([
                 "success" => false,
                 "message" => "Customer cannot be deleted because it has subscriptions",

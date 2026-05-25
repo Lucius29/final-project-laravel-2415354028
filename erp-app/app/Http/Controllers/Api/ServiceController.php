@@ -112,6 +112,14 @@ class ServiceController extends Controller
             ], 404);
         }
 
+        if ($service->subscriptions_count > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Service already has subscriptions',
+                'errors' => [],
+            ], 422);
+        }
+
         if ($service->subscriptions()->exists()) {
             return response()->json([
                 "success" => false,

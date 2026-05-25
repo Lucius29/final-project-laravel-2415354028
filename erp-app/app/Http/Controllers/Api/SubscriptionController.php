@@ -29,7 +29,7 @@ class SubscriptionController extends Controller
     {
         $data = $request->validate([
             "customer_id" => ["required", "exists:customers,id"],
-            "service_id" => ["required", "exists:service,id"],
+            "service_id" => ["required", "exists:services,id"],
             "start_date" => ["required", "date"],
             "end_date" => ["required", "date", "after:start_date"],
             "status" => [
@@ -78,6 +78,14 @@ class SubscriptionController extends Controller
             ], 404);
         }
 
+        if ($subscription->status === 'dismantle') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Dismantle subscription cannot be modified',
+                'errors' => [],
+            ], 422);
+        }
+
         $data = $request->validate([
             "customer_id" => ["sometimes", "exists:customers,id"],
             "service_id" => ["sometimes", "exists:services,id"],
@@ -88,6 +96,7 @@ class SubscriptionController extends Controller
                 "in:active,inactive,trial,isolir,dismantle",
             ],
         ]);
+
 
         $subscription->update($data);
 

@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
-    protected $fillable = ["name", "price", "description", "status"];
-    // protected function casts(): array
-    // {
-    //     return [
-    //         "status" => "boolean",
-    //         "price" => "integer"
-    //     ];
-    // }
+    protected $fillable = [
+        'id',
+        'name',
+        'price',
+        'description',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
 
     /** 
      *@return HasMany<Subcription, $this>
